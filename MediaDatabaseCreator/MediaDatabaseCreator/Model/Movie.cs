@@ -1,9 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Reflection.PortableExecutable;
 
 namespace MediaDatabaseCreator.Model
 {
     public class Movie
     {
+        public Movie()
+        {
+            Characters = new HashSet<Character>();
+        }
         [Key]
         public int MovieId { get; set; }
         [MaxLength(40)]
@@ -15,6 +20,9 @@ namespace MediaDatabaseCreator.Model
         public string Director { get; set; }
         public string MoviePicture { get; set; }
         public string MovieTrailer { get; set; }
+        public virtual ICollection<Character> Characters { get; set; }
+        public virtual Franchise? Franchise { get; set; }
+   
 
     }
 }
