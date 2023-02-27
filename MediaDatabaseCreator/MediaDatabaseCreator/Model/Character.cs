@@ -4,7 +4,6 @@ namespace MediaDatabaseCreator.Model
 {
     public class Character
     {
-        
         [Key]
         public int CharacterId { get; set; }
         [MaxLength(40)]
