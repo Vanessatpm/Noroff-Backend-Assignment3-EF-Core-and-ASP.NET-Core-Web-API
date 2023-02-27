@@ -22,7 +22,5 @@ namespace MediaDatabaseCreator.Model
         public string MovieTrailer { get; set; }
         public virtual ICollection<Character> Characters { get; set; }
         public virtual Franchise? Franchise { get; set; }
-   
-
     }
 }
