@@ -11,6 +11,6 @@ namespace MediaDatabaseCreator.Model
         }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Character> Characters { get; set; }
-        public DbContext<Franchise> Franchises { get; set; }
+        public DbSet<Franchise> Franchises { get; set; }
     }
 }
