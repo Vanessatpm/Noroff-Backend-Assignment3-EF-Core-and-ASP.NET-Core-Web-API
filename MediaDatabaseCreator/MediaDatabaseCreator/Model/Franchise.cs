@@ -5,7 +5,7 @@ namespace MediaDatabaseCreator.Model
     public class Franchise
     {
         [Key]
-        public int Id { get; set; }
+        public int FranchiseId { get; set; }
         [MaxLength(40)]
         public string Name { get; set; }
         [MaxLength(100)]

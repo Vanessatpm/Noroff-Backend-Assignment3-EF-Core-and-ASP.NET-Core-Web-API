@@ -5,7 +5,7 @@ namespace MediaDatabaseCreator.Model
     public class Movie
     {
         [Key]
-        public int Id { get; set; }
+        public int MovieId { get; set; }
         [MaxLength(40)]
         public string MovieTitle { get; set; }
         [MaxLength(60)]
