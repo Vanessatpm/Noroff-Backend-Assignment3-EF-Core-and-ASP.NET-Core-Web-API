@@ -3,9 +3,9 @@ using System.Diagnostics;
 
 namespace MediaDatabaseCreator.Model
 {
-    public class MovieEFContext : DbContext
+    public class MovieDbContext : DbContext
     {
-        public MovieEFContext() : base()
+        public MovieDbContext() : base()
         {
 
         }
