@@ -10,6 +10,8 @@ namespace MediaDatabaseCreator.Model
         public string Name { get; set; } = null!;
         [MaxLength(600)]
         public string? Description { get; set; }
+
+        // Navigation
         public virtual ICollection<Movie> Movies { get; set; } = new HashSet<Movie>();
     }
 }

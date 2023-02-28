@@ -13,6 +13,8 @@ namespace MediaDatabaseCreator.Model
         [MaxLength(5)]
         public string? Gender { get; set; }
         public string? Picture { get; set; }
+
+        // Navigation
         public virtual ICollection<Movie> Movies { get;set; } = new HashSet<Movie>();
     }
 }

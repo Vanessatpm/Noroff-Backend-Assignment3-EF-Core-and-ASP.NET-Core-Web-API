@@ -16,6 +16,8 @@ namespace MediaDatabaseCreator.Model
         public string Director { get; set; } = null!;
         public string? MoviePicture { get; set; }
         public string? MovieTrailer { get; set; }
+
+        // Navigation
         public virtual ICollection<Character> Characters { get; set; } = new HashSet<Character>();
         public int FranchiseId { get; set; }
         public virtual Franchise Franchise { get; set; } = null!;
