@@ -7,7 +7,7 @@ namespace MediaDatabaseCreator.Model
     {
         [Key]
         public int MovieId { get; set; }
-        [MaxLength(40)]
+        [MaxLength(60)]
         public string MovieTitle { get; set; } = null!;
         [MaxLength(60)]
         public string? Genre { get; set; }

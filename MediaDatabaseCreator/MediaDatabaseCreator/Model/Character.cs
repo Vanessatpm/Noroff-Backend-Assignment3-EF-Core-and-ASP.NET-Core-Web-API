@@ -10,7 +10,8 @@ namespace MediaDatabaseCreator.Model
         public string FullName { get; set; } = null!;
         [MaxLength(40)]
         public string? Alias { get; set; }
-        public bool? Gender { get; set; }
+        [MaxLength(5)]
+        public string? Gender { get; set; }
         public string? Picture { get; set; }
         public virtual ICollection<Movie> Movies { get;set; } = new HashSet<Movie>();
     }
