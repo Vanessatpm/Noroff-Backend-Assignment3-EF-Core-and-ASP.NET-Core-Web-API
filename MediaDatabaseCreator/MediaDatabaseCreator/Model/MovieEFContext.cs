@@ -12,5 +12,14 @@ namespace MediaDatabaseCreator.Model
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Character> Characters { get; set; }
         public DbSet<Franchise> Franchises { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(
+                "Data Source = " + //<INSERT YOUR DATA SOURCE>; " +
+                "Initial Catalog = MovieEF; " +
+                "Integrated Security = True; " +
+                "Trust Server Certificate = True;");
+        }
     }
 }
