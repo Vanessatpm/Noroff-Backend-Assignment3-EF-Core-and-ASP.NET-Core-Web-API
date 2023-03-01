@@ -12,7 +12,7 @@ namespace MediaDatabaseCreator
             // Add services to the container.
             builder.Services.AddDbContext<MovieDbContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("AppSettingsDbContext"));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("VanessaAppSettingsDbContext"));
             });
 
             builder.Services.AddControllers();

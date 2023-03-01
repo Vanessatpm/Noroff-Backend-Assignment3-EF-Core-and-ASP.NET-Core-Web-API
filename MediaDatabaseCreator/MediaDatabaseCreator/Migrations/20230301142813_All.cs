@@ -7,7 +7,7 @@
 namespace MediaDatabaseCreator.Migrations
 {
     /// <inheritdoc />
-    public partial class addedSeededDataAndRelationsInit : Migration
+    public partial class All : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

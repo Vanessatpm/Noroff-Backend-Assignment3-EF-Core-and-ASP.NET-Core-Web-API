@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MediaDatabaseCreator.Migrations
 {
     [DbContext(typeof(MovieDbContext))]
-    [Migration("20230301141457_addedSeededDataAndRelationsInit")]
-    partial class addedSeededDataAndRelationsInit
+    [Migration("20230301142813_All")]
+    partial class All
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
