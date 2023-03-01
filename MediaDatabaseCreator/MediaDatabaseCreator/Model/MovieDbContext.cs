@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;
 
@@ -31,10 +32,58 @@ namespace MediaDatabaseCreator.Model
 
             // Movies
             modelBuilder.Entity<Movie>().HasData(
-                new Movie() { MovieId = -1, MovieTitle = "Avengers: Endgame", Genre = "Action, Adventure, Drama", ReleaseYear = 2019, Director = "Anthony Russo, Joe Russo", MoviePictureUrl = "https://www.imdb.com/title/tt4154796/mediaviewer/rm1057017345/", MovieTrailerUrl = "https://www.youtube.com/watch?v=TcMBFSGVi1c" },
-                new Movie() { MovieId = -2, MovieTitle = "Star Wars: Episode IV - A New Hope", Genre = "Action, Adventure, Fantasy", ReleaseYear = 1977, Director = "George Lucas", MoviePictureUrl = "https://www.imdb.com/title/tt0076759/mediaviewer/rm3500569857/", MovieTrailerUrl = "https://www.youtube.com/watch?v=1g3_CFmnU7k" },
-                new Movie() { MovieId = -3, MovieTitle = "The Lord of the Rings: The Fellowship of the Ring", Genre = "Action, Adventure, Drama", ReleaseYear = 2001, Director = "Peter Jackson", MoviePictureUrl = "https://www.imdb.com/title/tt0120737/mediaviewer/rm3693752064/", MovieTrailerUrl = "https://www.youtube.com/watch?v=V75dMMIW2B4" }
+                new Movie()
+                {
+                    MovieId = -1,
+                    MovieTitle = "Avengers: Endgame",
+                    Genre = "Action, Adventure, Drama",
+                    ReleaseYear = 2019,
+                    Director = "Anthony Russo, Joe Russo",
+                    MoviePictureUrl = "https://www.imdb.com/title/tt4154796/mediaviewer/rm1057017345/",
+                    MovieTrailerUrl = "https://www.youtube.com/watch?v=TcMBFSGVi1c",
+                    FranchiseId = -2
+                },
+                new Movie() { 
+                    MovieId = -2, 
+                    MovieTitle = "Star Wars: Episode IV - A New Hope", 
+                    Genre = "Action, Adventure, Fantasy", 
+                    ReleaseYear = 1977, 
+                    Director = "George Lucas", 
+                    MoviePictureUrl = "https://www.imdb.com/title/tt0076759/mediaviewer/rm3500569857/", 
+                    MovieTrailerUrl = "https://www.youtube.com/watch?v=1g3_CFmnU7k", 
+                    FranchiseId = -2
+                },
+                new Movie() { 
+                    MovieId = -3, 
+                    MovieTitle = "The Lord of the Rings: The Fellowship of the Ring", 
+                    Genre = "Action, Adventure, Drama", 
+                    ReleaseYear = 2001, 
+                    Director = "Peter Jackson", 
+                    MoviePictureUrl = "https://www.imdb.com/title/tt0120737/mediaviewer/rm3693752064/", 
+                    MovieTrailerUrl = "https://www.youtube.com/watch?v=V75dMMIW2B4",
+                    FranchiseId = -3
+                }
             );
+
+            // CharacterMovie
+            modelBuilder.Entity<Character>()
+                .HasMany(character => character.Movies)
+                .WithMany(movie => movie.Characters)
+                .UsingEntity<Dictionary<string, object>>(
+                    "CharacterMovie",
+                    r => r.HasOne<Movie>().WithMany().HasForeignKey("MovieId"),
+                    l => l.HasOne<Character>().WithMany().HasForeignKey("CharacterId"),
+                    je =>
+                    {
+                        je.HasKey("CharacterId", "MovieId");
+                        je.HasData(
+                            new { CharacterId = -1, MovieId = -2 },
+                            new { CharacterId = -2, MovieId = -2 },
+                            new { CharacterId = -2, MovieId = -1 },
+                            new { CharacterId = -3, MovieId = -2 },
+                            new { CharacterId = -2, MovieId = -3 },
+                            new { CharacterId = -6, MovieId = -1 });
+                    });
         }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Character> Characters { get; set; }
