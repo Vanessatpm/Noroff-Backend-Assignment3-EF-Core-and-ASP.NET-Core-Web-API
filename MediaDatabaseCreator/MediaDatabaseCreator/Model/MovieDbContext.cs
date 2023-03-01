@@ -10,7 +10,7 @@ namespace MediaDatabaseCreator.Model
         {
         }
         
-        // Database Tables
+        // DbSets
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Character> Characters { get; set; }
         public DbSet<Franchise> Franchises { get; set; }
