@@ -1,6 +1,6 @@
 ﻿namespace MediaDatabaseCreator.Services
 {
-    public interface ICharacter
+    public interface ICharacterService
     {
     }
 }
