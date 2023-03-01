@@ -21,6 +21,6 @@ namespace MediaDatabaseCreator.Model
         // Navigation
         public virtual ICollection<Character> Characters { get; set; } = new HashSet<Character>();
         public int? FranchiseId { get; set; }
-        public virtual Franchise Franchise { get; set; } = null!;
+        public virtual Franchise? Franchise { get; set; } = null!;
     }
 }
