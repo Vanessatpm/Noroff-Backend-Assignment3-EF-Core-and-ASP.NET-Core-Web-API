@@ -9,10 +9,8 @@ namespace MediaDatabaseCreator.Model
         public MovieDbContext(DbContextOptions<MovieDbContext> options) : base(options) 
         {
         }
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer();
-        //}
+        
+        // Database Tables
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Character> Characters { get; set; }
         public DbSet<Franchise> Franchises { get; set; }
