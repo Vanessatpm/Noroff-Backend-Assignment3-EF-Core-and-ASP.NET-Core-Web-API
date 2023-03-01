@@ -10,6 +10,7 @@ namespace MediaDatabaseCreator.Model
         {
         }
 
+        // Data seeding
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Franchise>().HasData(
@@ -33,6 +34,7 @@ namespace MediaDatabaseCreator.Model
             );
         }
 
+        // DbSets
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Character> Characters { get; set; }
         public DbSet<Franchise> Franchises { get; set; }
