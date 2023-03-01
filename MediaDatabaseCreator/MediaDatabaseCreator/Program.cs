@@ -1,3 +1,6 @@
+using MediaDatabaseCreator.Model;
+using Microsoft.EntityFrameworkCore;
+
 namespace MediaDatabaseCreator
 {
     public class Program
@@ -7,6 +10,10 @@ namespace MediaDatabaseCreator
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDbContext<MovieDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("AppSettingsDbContext"));
+            });
 
             builder.Services.AddControllers();
 
