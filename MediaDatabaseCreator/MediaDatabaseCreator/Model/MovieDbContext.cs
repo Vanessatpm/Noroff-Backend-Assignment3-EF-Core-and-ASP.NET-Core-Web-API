@@ -10,6 +10,7 @@ namespace MediaDatabaseCreator.Model
         {
         }
 
+        // Data seeding
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Franchise>().HasData(
