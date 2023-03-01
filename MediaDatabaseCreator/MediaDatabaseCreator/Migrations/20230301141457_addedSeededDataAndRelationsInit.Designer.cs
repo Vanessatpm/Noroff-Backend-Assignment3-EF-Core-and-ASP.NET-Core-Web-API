@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MediaDatabaseCreator.Migrations
 {
     [DbContext(typeof(MovieDbContext))]
-    [Migration("20230301094000_Make-Movie.FranchiseNullable")]
-    partial class MakeMovieFranchiseNullable
+    [Migration("20230301141457_addedSeededDataAndRelationsInit")]
+    partial class addedSeededDataAndRelationsInit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,15 +58,65 @@ namespace MediaDatabaseCreator.Migrations
                         .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("Gender")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
 
-                    b.Property<string>("Picture")
+                    b.Property<string>("PictureUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CharacterId");
 
                     b.ToTable("Characters");
+
+                    b.HasData(
+                        new
+                        {
+                            CharacterId = -1,
+                            Alias = "Iron Man",
+                            FullName = "Tony Stark",
+                            Gender = "Male",
+                            PictureUrl = "https://www.imdb.com/title/tt0371746/mediaviewer/rm1006248448/"
+                        },
+                        new
+                        {
+                            CharacterId = -2,
+                            Alias = "Captain America",
+                            FullName = "Steve Rogers",
+                            Gender = "Male",
+                            PictureUrl = "https://www.imdb.com/title/tt0458339/mediaviewer/rm2483030016/"
+                        },
+                        new
+                        {
+                            CharacterId = -3,
+                            Alias = "Thor",
+                            FullName = "Thor Odinson",
+                            Gender = "Male",
+                            PictureUrl = "https://www.imdb.com/title/tt0800369/mediaviewer/rm1346871297/"
+                        },
+                        new
+                        {
+                            CharacterId = -4,
+                            Alias = "Jedi Knight",
+                            FullName = "Luke Skywalker",
+                            Gender = "Male",
+                            PictureUrl = "https://www.imdb.com/title/tt0076759/mediaviewer/rm2446233600/"
+                        },
+                        new
+                        {
+                            CharacterId = -5,
+                            Alias = "General Leia Organa",
+                            FullName = "Princess Leia Organa",
+                            Gender = "Female",
+                            PictureUrl = "https://www.imdb.com/title/tt0076759/mediaviewer/rm1222220800/"
+                        },
+                        new
+                        {
+                            CharacterId = -6,
+                            Alias = "Ring bearer",
+                            FullName = "Frodo Baggins",
+                            Gender = "Male",
+                            PictureUrl = "https://example.com/frodo.jpg"
+                        });
                 });
 
             modelBuilder.Entity("MediaDatabaseCreator.Model.Franchise", b =>
@@ -89,6 +139,26 @@ namespace MediaDatabaseCreator.Migrations
                     b.HasKey("FranchiseId");
 
                     b.ToTable("Franchises");
+
+                    b.HasData(
+                        new
+                        {
+                            FranchiseId = -1,
+                            Description = "A series of superhero films produced by Marvel Studios",
+                            Name = "Marvel Cinematic Universe"
+                        },
+                        new
+                        {
+                            FranchiseId = -2,
+                            Description = "An epic space opera media franchise created by George Lucas",
+                            Name = "Star Wars"
+                        },
+                        new
+                        {
+                            FranchiseId = -3,
+                            Description = "An epic high fantasy novel by J.R.R. Tolkien",
+                            Name = "The Lord of the Rings"
+                        });
                 });
 
             modelBuilder.Entity("MediaDatabaseCreator.Model.Movie", b =>
@@ -111,7 +181,7 @@ namespace MediaDatabaseCreator.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
-                    b.Property<string>("MoviePicture")
+                    b.Property<string>("MoviePictureUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MovieTitle")
@@ -119,7 +189,7 @@ namespace MediaDatabaseCreator.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
-                    b.Property<string>("MovieTrailer")
+                    b.Property<string>("MovieTrailerUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ReleaseYear")
@@ -130,6 +200,38 @@ namespace MediaDatabaseCreator.Migrations
                     b.HasIndex("FranchiseId");
 
                     b.ToTable("Movies");
+
+                    b.HasData(
+                        new
+                        {
+                            MovieId = -1,
+                            Director = "Anthony Russo, Joe Russo",
+                            Genre = "Action, Adventure, Drama",
+                            MoviePictureUrl = "https://www.imdb.com/title/tt4154796/mediaviewer/rm1057017345/",
+                            MovieTitle = "Avengers: Endgame",
+                            MovieTrailerUrl = "https://www.youtube.com/watch?v=TcMBFSGVi1c",
+                            ReleaseYear = 2019
+                        },
+                        new
+                        {
+                            MovieId = -2,
+                            Director = "George Lucas",
+                            Genre = "Action, Adventure, Fantasy",
+                            MoviePictureUrl = "https://www.imdb.com/title/tt0076759/mediaviewer/rm3500569857/",
+                            MovieTitle = "Star Wars: Episode IV - A New Hope",
+                            MovieTrailerUrl = "https://www.youtube.com/watch?v=1g3_CFmnU7k",
+                            ReleaseYear = 1977
+                        },
+                        new
+                        {
+                            MovieId = -3,
+                            Director = "Peter Jackson",
+                            Genre = "Action, Adventure, Drama",
+                            MoviePictureUrl = "https://www.imdb.com/title/tt0120737/mediaviewer/rm3693752064/",
+                            MovieTitle = "The Lord of the Rings: The Fellowship of the Ring",
+                            MovieTrailerUrl = "https://www.youtube.com/watch?v=V75dMMIW2B4",
+                            ReleaseYear = 2001
+                        });
                 });
 
             modelBuilder.Entity("CharacterMovie", b =>

@@ -113,7 +113,7 @@ namespace MediaDatabaseCreator.Migrations
                             FullName = "Frodo Baggins",
                             Gender = "Male",
                             PictureUrl = "https://example.com/frodo.jpg"
-                });
+                        });
                 });
 
             modelBuilder.Entity("MediaDatabaseCreator.Model.Franchise", b =>
