@@ -11,17 +11,23 @@ namespace MediaDatabaseCreator.Model
         {
         }
 
+        // DbSets
+        public DbSet<Movie> Movies { get; set; }
+        public DbSet<Character> Characters { get; set; }
+        public DbSet<Franchise> Franchises { get; set; }
+
         // Data seeding
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Franchises
+            #region Franchises
             modelBuilder.Entity<Franchise>().HasData(
                 new Franchise() { FranchiseId = -1, Name = "Marvel Cinematic Universe", Description = "A series of superhero films produced by Marvel Studios" },
                 new Franchise() { FranchiseId = -2, Name = "Star Wars", Description = "An epic space opera media franchise created by George Lucas" },
                 new Franchise() { FranchiseId = -3, Name = "The Lord of the Rings", Description = "An epic high fantasy novel by J.R.R. Tolkien" }
             );
+            #endregion
 
-            // Characters
+            #region Characters
             modelBuilder.Entity<Character>().HasData(
                new Character() { CharacterId = -1, FullName = "Tony Stark", Alias = "Iron Man", Gender = "Male", PictureUrl = "https://www.imdb.com/title/tt0371746/mediaviewer/rm1006248448/" },
                new Character() { CharacterId = -2, FullName = "Steve Rogers", Alias = "Captain America", Gender = "Male", PictureUrl = "https://www.imdb.com/title/tt0458339/mediaviewer/rm2483030016/" },
@@ -29,8 +35,9 @@ namespace MediaDatabaseCreator.Model
                new Character() { CharacterId = -4, FullName = "Luke Skywalker", Alias = "Jedi Knight", Gender = "Male", PictureUrl = "https://www.imdb.com/title/tt0076759/mediaviewer/rm2446233600/" },
                new Character() { CharacterId = -5, FullName = "Princess Leia Organa", Alias = "General Leia Organa", Gender = "Female", PictureUrl = "https://www.imdb.com/title/tt0076759/mediaviewer/rm1222220800/" },
                new Character() { CharacterId = -6, FullName = "Frodo Baggins", Alias = "Ring bearer", Gender = "Male", PictureUrl = "https://example.com/frodo.jpg" });
+            #endregion
 
-            // Movies
+            #region Movies
             modelBuilder.Entity<Movie>().HasData(
                 new Movie()
                 {
@@ -64,8 +71,9 @@ namespace MediaDatabaseCreator.Model
                     FranchiseId = -3
                 }
             );
+            #endregion
 
-            // CharacterMovie
+            #region CharacterMovie
             modelBuilder.Entity<Character>()
                 .HasMany(character => character.Movies)
                 .WithMany(movie => movie.Characters)
@@ -84,9 +92,9 @@ namespace MediaDatabaseCreator.Model
                             new { CharacterId = -2, MovieId = -3 },
                             new { CharacterId = -6, MovieId = -1 });
                     });
+            #endregion
         }
-        public DbSet<Movie> Movies { get; set; }
-        public DbSet<Character> Characters { get; set; }
-        public DbSet<Franchise> Franchises { get; set; }
+
+        
     }
 }
