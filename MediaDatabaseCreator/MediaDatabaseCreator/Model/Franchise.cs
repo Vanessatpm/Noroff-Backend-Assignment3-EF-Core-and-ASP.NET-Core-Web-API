@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MediaDatabaseCreator.Model
 {
     public class Franchise
     {
+
         [Key]
         public int FranchiseId { get; set; }
         [MaxLength(40)] 
