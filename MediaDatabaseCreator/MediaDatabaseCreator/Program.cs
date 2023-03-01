@@ -13,7 +13,7 @@ namespace MediaDatabaseCreator
             builder.Services.AddDbContext<MovieDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString(
-                    "VanessaAppSettingsDbContext"
+                    "VanessaMovieDatabase"
                     ));
             });
 
