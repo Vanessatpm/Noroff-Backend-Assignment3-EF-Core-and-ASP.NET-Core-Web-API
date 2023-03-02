@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MediaDatabaseCreator.Migrations
 {
     [DbContext(typeof(FilmDbContext))]
-    partial class MovieDbContextModelSnapshot : ModelSnapshot
+    partial class FilmDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

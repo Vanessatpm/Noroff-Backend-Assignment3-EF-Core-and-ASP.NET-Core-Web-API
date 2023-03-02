@@ -7,6 +7,12 @@ namespace MediaDatabaseCreator.Services
     {
         private readonly FilmDbContext _context;
 
+        public CharacterService(FilmDbContext context)
+        {
+            _context = context;
+        }
+
+
         public async Task<Character> AddAsync(Character obj)
         {
             await _context.Characters.AddAsync(obj);
