@@ -11,47 +11,47 @@ namespace MediaDatabaseCreator.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FranchisesController : ControllerBase
+    public class MovieController : ControllerBase
     {
         private readonly MovieDbContext _context;
 
-        public FranchisesController(MovieDbContext context)
+        public MovieController(MovieDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Franchises
+        // GET: api/Movies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Franchise>>> GetFranchises()
+        public async Task<ActionResult<IEnumerable<Movie>>> GetMovies()
         {
-            return await _context.Franchises.ToListAsync();
+            return await _context.Movies.ToListAsync();
         }
 
-        // GET: api/Franchises/5
+        // GET: api/Movies/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Franchise>> GetFranchise(int id)
+        public async Task<ActionResult<Movie>> GetMovie(int id)
         {
-            var franchise = await _context.Franchises.FindAsync(id);
+            var movie = await _context.Movies.FindAsync(id);
 
-            if (franchise == null)
+            if (movie == null)
             {
                 return NotFound();
             }
 
-            return franchise;
+            return movie;
         }
 
-        // PUT: api/Franchises/5
+        // PUT: api/Movies/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFranchise(int id, Franchise franchise)
+        public async Task<IActionResult> PutMovie(int id, Movie movie)
         {
-            if (id != franchise.FranchiseId)
+            if (id != movie.MovieId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(franchise).State = EntityState.Modified;
+            _context.Entry(movie).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace MediaDatabaseCreator.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!FranchiseExists(id))
+                if (!MovieExists(id))
                 {
                     return NotFound();
                 }
@@ -72,36 +72,36 @@ namespace MediaDatabaseCreator.Controllers
             return NoContent();
         }
 
-        // POST: api/Franchises
+        // POST: api/Movies
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Franchise>> PostFranchise(Franchise franchise)
+        public async Task<ActionResult<Movie>> PostMovie(Movie movie)
         {
-            _context.Franchises.Add(franchise);
+            _context.Movies.Add(movie);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFranchise", new { id = franchise.FranchiseId }, franchise);
+            return CreatedAtAction("GetMovie", new { id = movie.MovieId }, movie);
         }
 
-        // DELETE: api/Franchises/5
+        // DELETE: api/Movies/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteFranchise(int id)
+        public async Task<IActionResult> DeleteMovie(int id)
         {
-            var franchise = await _context.Franchises.FindAsync(id);
-            if (franchise == null)
+            var movie = await _context.Movies.FindAsync(id);
+            if (movie == null)
             {
                 return NotFound();
             }
 
-            _context.Franchises.Remove(franchise);
+            _context.Movies.Remove(movie);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool FranchiseExists(int id)
+        private bool MovieExists(int id)
         {
-            return _context.Franchises.Any(e => e.FranchiseId == id);
+            return _context.Movies.Any(e => e.MovieId == id);
         }
     }
 }
