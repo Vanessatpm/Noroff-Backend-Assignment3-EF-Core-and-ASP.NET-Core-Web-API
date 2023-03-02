@@ -4,16 +4,19 @@ using MediaDatabaseCreator.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace MediaDatabaseCreator.Migrations
 {
-    [DbContext(typeof(FilmDbContext))]
-    partial class MovieDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(MovieDbContext))]
+    [Migration("20230301164510_AddRelationships")]
+    partial class AddRelationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

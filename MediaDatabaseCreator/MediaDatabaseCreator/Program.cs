@@ -13,7 +13,9 @@ namespace MediaDatabaseCreator
             // Add services to the container.
             builder.Services.AddDbContext<FilmDbContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("VanessaAppSettingsDbContext"));
+                options.UseSqlServer(builder.Configuration.GetConnectionString(
+                    "VanessaMovieDatabase"
+                    ));
             });
 
             builder.Services.AddScoped<ICharacterService, CharacterService>();
