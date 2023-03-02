@@ -4,9 +4,9 @@ using System.Diagnostics;
 
 namespace MediaDatabaseCreator.Model
 {
-    public class MovieDbContext : DbContext
+    public class FilmDbContext : DbContext
     {
-        public MovieDbContext(DbContextOptions<MovieDbContext> options) : base(options)
+        public FilmDbContext(DbContextOptions<FilmDbContext> options) : base(options)
         {
         }
 

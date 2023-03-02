@@ -13,9 +13,9 @@ namespace MediaDatabaseCreator.Controllers
     [ApiController]
     public class FranchisesController : ControllerBase
     {
-        private readonly MovieDbContext _context;
+        private readonly FilmDbContext _context;
 
-        public FranchisesController(MovieDbContext context)
+        public FranchisesController(FilmDbContext context)
         {
             _context = context;
         }

@@ -11,11 +11,11 @@ namespace MediaDatabaseCreator.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MoviesController : ControllerBase
+    public class MovieController : ControllerBase
     {
-        private readonly MovieDbContext _context;
+        private readonly FilmDbContext _context;
 
-        public MoviesController(MovieDbContext context)
+        public MovieController(FilmDbContext context)
         {
             _context = context;
         }
