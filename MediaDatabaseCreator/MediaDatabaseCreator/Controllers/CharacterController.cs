@@ -26,7 +26,7 @@ namespace MediaDatabaseCreator.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Character>>> GetCharacters()
         {
-            return await _context.Characters.ToListAsync();
+            return await _characterService.GetAllAsync();
         }
 
         // GET: api/Characters/5
