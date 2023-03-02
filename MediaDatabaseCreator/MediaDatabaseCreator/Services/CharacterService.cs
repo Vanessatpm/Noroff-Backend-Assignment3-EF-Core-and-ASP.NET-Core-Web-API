@@ -21,16 +21,27 @@ namespace MediaDatabaseCreator.Services
 
         public async Task<IEnumerable<Character>> GetAllAsync()
         {
-            return await _context.Characters.ToListAsync();   
+            return await _context.Characters.ToListAsync();
         }
 
-        public Task<Character> GetByIdAsync(int id)
+        public async Task<Character> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Characters.FindAsync(id);
         }
 
-        public Task<Character> UpdateAsync(Character obj)
+        public async Task<IEnumerable<Movie>> GetMoviesAsync(int id)
         {
-            throw new NotImplementedException();
+            return (await _context.Characters
+                .Where(c => c.CharacterId== id)
+                .Include(c => c.Movies)
+                .FirstAsync()).Movies;
+        }
+
+        public async Task<Character> UpdateAsync(Character obj)
+        {
+             _context.Entry(obj).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return obj;
         }
     }
+}
