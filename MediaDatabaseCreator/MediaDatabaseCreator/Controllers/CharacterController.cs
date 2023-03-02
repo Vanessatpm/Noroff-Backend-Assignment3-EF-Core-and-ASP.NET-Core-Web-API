@@ -6,18 +6,20 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MediaDatabaseCreator.Model;
+using MediaDatabaseCreator.Services;
 
 namespace MediaDatabaseCreator.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CharactersController : ControllerBase
+    public class CharacterController : ControllerBase
     {
-        private readonly MovieDbContext _context;
+        private readonly FilmDbContext _context;
+        private readonly ICharacterService _characterService;
 
-        public CharactersController(MovieDbContext context)
+        public CharacterController(ICharacterService characterService)
         {
-            _context = context;
+            _characterService = characterService;
         }
 
         // GET: api/Characters

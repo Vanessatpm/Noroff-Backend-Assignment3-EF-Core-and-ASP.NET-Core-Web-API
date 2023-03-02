@@ -1,4 +1,5 @@
 using MediaDatabaseCreator.Model;
+using MediaDatabaseCreator.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace MediaDatabaseCreator
@@ -10,10 +11,12 @@ namespace MediaDatabaseCreator
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddDbContext<MovieDbContext>(options =>
+            builder.Services.AddDbContext<FilmDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("VanessaAppSettingsDbContext"));
             });
+
+            builder.Services.AddScoped<ICharacterService, CharacterService>();
 
             builder.Services.AddControllers();
 
