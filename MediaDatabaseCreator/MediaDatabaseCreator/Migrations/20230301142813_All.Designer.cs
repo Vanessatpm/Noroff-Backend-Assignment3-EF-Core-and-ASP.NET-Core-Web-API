@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MediaDatabaseCreator.Migrations
 {
-    [DbContext(typeof(MovieDbContext))]
+    [DbContext(typeof(FilmDbContext))]
     [Migration("20230301142813_All")]
     partial class All
     {

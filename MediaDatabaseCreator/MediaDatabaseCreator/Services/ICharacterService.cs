@@ -1,6 +1,9 @@
-﻿namespace MediaDatabaseCreator.Services
+﻿using MediaDatabaseCreator.Model;
+
+namespace MediaDatabaseCreator.Services
 {
-    public interface ICharacterService
+    public interface ICharacterService : ICrudService<Character, int>
     {
+
     }
 }
