@@ -2,10 +2,10 @@
 {
     public interface ICrudService <T,ID>
     {
-        ICollection<T> GetAll();
-        T GetById(ID id);
-        T Add(T obj);
-        T Update(T obj);
-        T Delete(ID obj);
+        Task<ICollection<T>> GetAllAsync();
+        Task<T> GetByIdAsync(ID id);
+        Task<T> AddAsync(T obj);
+        Task<T> UpdateAsync(T obj);
+        void Delete(ID obj);
     }
 }

@@ -9,7 +9,9 @@ namespace MediaDatabaseCreator.Services
 
         public async Task<Character> AddAsync(Character obj)
         {
-             return await _context.Characters.AddAsync(obj);
+            await _context.Characters.AddAsync(obj);
+            await _context.SaveChangesAsync();
+            return obj;
         }
 
         public void Delete(int obj)
@@ -19,7 +21,7 @@ namespace MediaDatabaseCreator.Services
 
         public async Task<ICollection<Character>> GetAllAsync()
         {
-            return await _context.Characters.ToArrayAsync();   
+            return await _context.Characters.ToListAsync();   
         }
 
         public Task<Character> GetByIdAsync(int id)
