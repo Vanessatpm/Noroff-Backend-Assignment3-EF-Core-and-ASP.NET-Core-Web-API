@@ -19,7 +19,7 @@ namespace MediaDatabaseCreator.Services
             throw new NotImplementedException();
         }
 
-        public async Task<ICollection<Character>> GetAllAsync()
+        public async Task<IEnumerable<Character>> GetAllAsync()
         {
             return await _context.Characters.ToListAsync();   
         }
