@@ -9,25 +9,25 @@ using MediaDatabaseCreator.Model;
 
 namespace MediaDatabaseCreator.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/franchises")]
     [ApiController]
     public class FranchiseController : ControllerBase
     {
-        private readonly MovieDbContext _context;
+        private readonly IFranchiseService _franchiseService;//**MovieDbContext;
 
-        public FranchiseController(MovieDbContext context)
+        public FranchiseController(IFranchiseService franchiseService)
         {
-            _context = context;
+            _franchiseService = franchiseService;
         }
 
-        // GET: api/Franchises
+        // GET: api/v1/franchises 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Franchise>>> GetFranchises()
         {
-            return await _context.Franchises.ToListAsync();
+            return Ok(await _franchiseService.GetAllAsync());
         }
-
-        // GET: api/Franchises/5
+        //*********
+        // GET: api/v1/franchises/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Franchise>> GetFranchise(int id)
         {
