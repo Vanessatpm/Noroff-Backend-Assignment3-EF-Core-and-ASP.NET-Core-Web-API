@@ -21,7 +21,7 @@ namespace MediaDatabaseCreator
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
-            builder.Services.AddScoped<ICharacterService, CharacterService>();
+            builder.Services.AddTransient<ICharacterService, CharacterService>();
             builder.Services.AddTransient<IFranchiseService, FranchiseService>();
 
             var app = builder.Build();
