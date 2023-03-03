@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MediaDatabaseCreator.Model;
 using MediaDatabaseCreator.Services;
+using MediaDatabaseCreator.Model.Entities;
 
 namespace MediaDatabaseCreator.Controllers
 {
@@ -42,7 +42,7 @@ namespace MediaDatabaseCreator.Controllers
         }
 
         [HttpGet("{id}/movies")]
-        public async Task<ActionResult<IEnumerable<Movie>>> GetMoviesForCharacter(int id)
+        public async Task<ActionResult<IEnumerable<MovieDTO>>> GetMoviesForCharacter(int id)
         {
             return Ok(await _characterService.GetMoviesAsync(id));
         }

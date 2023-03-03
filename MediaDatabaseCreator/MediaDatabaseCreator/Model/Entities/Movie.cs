@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection.PortableExecutable;
 
-namespace MediaDatabaseCreator.Model
+namespace MediaDatabaseCreator.Model.Entities
 {
-    public class Movie
+    public class MovieDTO
     {
         [Key]
         public int MovieId { get; set; }
@@ -22,6 +22,6 @@ namespace MediaDatabaseCreator.Model
         public int? characterId { get; set; }
         public virtual ICollection<Character> Characters { get; set; } = new HashSet<Character>();
         public int? FranchiseId { get; set; }
-        public virtual Franchise? Franchise { get; set; } = null!;
+        public virtual FranchiseDTO? Franchise { get; set; } = null!;
     }
 }

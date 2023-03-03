@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MediaDatabaseCreator.Model;
+using MediaDatabaseCreator.Model.Entities;
 
 namespace MediaDatabaseCreator.Controllers
 {
@@ -22,14 +22,14 @@ namespace MediaDatabaseCreator.Controllers
 
         // GET: api/Franchises
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Franchise>>> GetFranchises()
+        public async Task<ActionResult<IEnumerable<FranchiseDTO>>> GetFranchises()
         {
             return await _context.Franchises.ToListAsync();
         }
 
         // GET: api/Franchises/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Franchise>> GetFranchise(int id)
+        public async Task<ActionResult<FranchiseDTO>> GetFranchise(int id)
         {
             var franchise = await _context.Franchises.FindAsync(id);
 
@@ -44,7 +44,7 @@ namespace MediaDatabaseCreator.Controllers
         // PUT: api/Franchises/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFranchise(int id, Franchise franchise)
+        public async Task<IActionResult> PutFranchise(int id, FranchiseDTO franchise)
         {
             if (id != franchise.FranchiseId)
             {
@@ -75,7 +75,7 @@ namespace MediaDatabaseCreator.Controllers
         // POST: api/Franchises
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Franchise>> PostFranchise(Franchise franchise)
+        public async Task<ActionResult<FranchiseDTO>> PostFranchise(FranchiseDTO franchise)
         {
             _context.Franchises.Add(franchise);
             await _context.SaveChangesAsync();

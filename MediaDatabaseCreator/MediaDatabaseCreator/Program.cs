@@ -1,4 +1,4 @@
-using MediaDatabaseCreator.Model;
+using MediaDatabaseCreator.Model.Entities;
 using MediaDatabaseCreator.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;

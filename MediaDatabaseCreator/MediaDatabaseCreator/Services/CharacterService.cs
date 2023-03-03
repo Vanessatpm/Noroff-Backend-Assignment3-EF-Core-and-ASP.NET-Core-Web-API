@@ -1,4 +1,4 @@
-﻿using MediaDatabaseCreator.Model;
+﻿using MediaDatabaseCreator.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace MediaDatabaseCreator.Services
@@ -35,7 +35,7 @@ namespace MediaDatabaseCreator.Services
                 return await _context.Characters.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Movie>> GetMoviesAsync(int id)
+        public async Task<IEnumerable<MovieDTO>> GetMoviesAsync(int id)
         {
             return (await _context.Characters
                 .Where(c => c.CharacterId== id)
