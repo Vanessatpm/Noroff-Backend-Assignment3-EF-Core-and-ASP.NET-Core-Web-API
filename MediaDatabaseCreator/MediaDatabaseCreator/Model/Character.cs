@@ -16,6 +16,7 @@ namespace MediaDatabaseCreator.Model
         public string? PictureUrl { get; set; }
 
         // Navigation
+        public int? movieId { get; set; }
         public virtual ICollection<Movie> Movies { get;set; } = new HashSet<Movie>();
     }
 }

@@ -22,21 +22,6 @@ namespace MediaDatabaseCreator.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CharacterMovie", b =>
-                {
-                    b.Property<int>("CharactersCharacterId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MoviesMovieId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CharactersCharacterId", "MoviesMovieId");
-
-                    b.HasIndex("MoviesMovieId");
-
-                    b.ToTable("CharacterMovie");
-                });
-
             modelBuilder.Entity("MediaDatabaseCreator.Model.Character", b =>
                 {
                     b.Property<int>("CharacterId")
@@ -61,6 +46,9 @@ namespace MediaDatabaseCreator.Migrations
                     b.Property<string>("PictureUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("movieId")
+                        .HasColumnType("int");
+
                     b.HasKey("CharacterId");
 
                     b.ToTable("Characters");
@@ -68,51 +56,57 @@ namespace MediaDatabaseCreator.Migrations
                     b.HasData(
                         new
                         {
-                            CharacterId = -1,
+                            CharacterId = 1,
                             Alias = "Iron Man",
                             FullName = "Tony Stark",
                             Gender = "Male",
-                            PictureUrl = "https://www.imdb.com/title/tt0371746/mediaviewer/rm1006248448/"
+                            PictureUrl = "https://www.imdb.com/title/tt0371746/mediaviewer/rm1006248448/",
+                            movieId = 1
                         },
                         new
                         {
-                            CharacterId = -2,
+                            CharacterId = 2,
                             Alias = "Captain America",
                             FullName = "Steve Rogers",
                             Gender = "Male",
-                            PictureUrl = "https://www.imdb.com/title/tt0458339/mediaviewer/rm2483030016/"
+                            PictureUrl = "https://www.imdb.com/title/tt0458339/mediaviewer/rm2483030016/",
+                            movieId = 1
                         },
                         new
                         {
-                            CharacterId = -3,
+                            CharacterId = 3,
                             Alias = "Thor",
                             FullName = "Thor Odinson",
                             Gender = "Male",
-                            PictureUrl = "https://www.imdb.com/title/tt0800369/mediaviewer/rm1346871297/"
+                            PictureUrl = "https://www.imdb.com/title/tt0800369/mediaviewer/rm1346871297/",
+                            movieId = 1
                         },
                         new
                         {
-                            CharacterId = -4,
+                            CharacterId = 4,
                             Alias = "Jedi Knight",
                             FullName = "Luke Skywalker",
                             Gender = "Male",
-                            PictureUrl = "https://www.imdb.com/title/tt0076759/mediaviewer/rm2446233600/"
+                            PictureUrl = "https://www.imdb.com/title/tt0076759/mediaviewer/rm2446233600/",
+                            movieId = 2
                         },
                         new
                         {
-                            CharacterId = -5,
+                            CharacterId = 5,
                             Alias = "General Leia Organa",
                             FullName = "Princess Leia Organa",
                             Gender = "Female",
-                            PictureUrl = "https://www.imdb.com/title/tt0076759/mediaviewer/rm1222220800/"
+                            PictureUrl = "https://www.imdb.com/title/tt0076759/mediaviewer/rm1222220800/",
+                            movieId = 2
                         },
                         new
                         {
-                            CharacterId = -6,
+                            CharacterId = 6,
                             Alias = "Ring bearer",
                             FullName = "Frodo Baggins",
                             Gender = "Male",
-                            PictureUrl = "https://example.com/frodo.jpg"
+                            PictureUrl = "https://example.com/frodo.jpg",
+                            movieId = 3
                         });
                 });
 
@@ -140,19 +134,19 @@ namespace MediaDatabaseCreator.Migrations
                     b.HasData(
                         new
                         {
-                            FranchiseId = -1,
+                            FranchiseId = 1,
                             Description = "A series of superhero films produced by Marvel Studios",
                             Name = "Marvel Cinematic Universe"
                         },
                         new
                         {
-                            FranchiseId = -2,
+                            FranchiseId = 2,
                             Description = "An epic space opera media franchise created by George Lucas",
                             Name = "Star Wars"
                         },
                         new
                         {
-                            FranchiseId = -3,
+                            FranchiseId = 3,
                             Description = "An epic high fantasy novel by J.R.R. Tolkien",
                             Name = "The Lord of the Rings"
                         });
@@ -192,6 +186,9 @@ namespace MediaDatabaseCreator.Migrations
                     b.Property<int>("ReleaseYear")
                         .HasColumnType("int");
 
+                    b.Property<int?>("characterId")
+                        .HasColumnType("int");
+
                     b.HasKey("MovieId");
 
                     b.HasIndex("FranchiseId");
@@ -201,7 +198,7 @@ namespace MediaDatabaseCreator.Migrations
                     b.HasData(
                         new
                         {
-                            MovieId = -1,
+                            MovieId = 1,
                             Director = "Anthony Russo, Joe Russo",
                             Genre = "Action, Adventure, Drama",
                             MoviePictureUrl = "https://www.imdb.com/title/tt4154796/mediaviewer/rm1057017345/",
@@ -211,7 +208,7 @@ namespace MediaDatabaseCreator.Migrations
                         },
                         new
                         {
-                            MovieId = -2,
+                            MovieId = 2,
                             Director = "George Lucas",
                             Genre = "Action, Adventure, Fantasy",
                             MoviePictureUrl = "https://www.imdb.com/title/tt0076759/mediaviewer/rm3500569857/",
@@ -221,7 +218,7 @@ namespace MediaDatabaseCreator.Migrations
                         },
                         new
                         {
-                            MovieId = -3,
+                            MovieId = 3,
                             Director = "Peter Jackson",
                             Genre = "Action, Adventure, Drama",
                             MoviePictureUrl = "https://www.imdb.com/title/tt0120737/mediaviewer/rm3693752064/",
@@ -231,19 +228,51 @@ namespace MediaDatabaseCreator.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CharacterMovie", b =>
+            modelBuilder.Entity("MovieCharacter", b =>
                 {
-                    b.HasOne("MediaDatabaseCreator.Model.Character", null)
-                        .WithMany()
-                        .HasForeignKey("CharactersCharacterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
 
-                    b.HasOne("MediaDatabaseCreator.Model.Movie", null)
-                        .WithMany()
-                        .HasForeignKey("MoviesMovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("CharacterId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MovieId", "CharacterId");
+
+                    b.HasIndex("CharacterId");
+
+                    b.ToTable("MovieCharacter");
+
+                    b.HasData(
+                        new
+                        {
+                            MovieId = 1,
+                            CharacterId = 1
+                        },
+                        new
+                        {
+                            MovieId = 1,
+                            CharacterId = 2
+                        },
+                        new
+                        {
+                            MovieId = 2,
+                            CharacterId = 1
+                        },
+                        new
+                        {
+                            MovieId = 2,
+                            CharacterId = 3
+                        },
+                        new
+                        {
+                            MovieId = 3,
+                            CharacterId = 2
+                        },
+                        new
+                        {
+                            MovieId = 3,
+                            CharacterId = 3
+                        });
                 });
 
             modelBuilder.Entity("MediaDatabaseCreator.Model.Movie", b =>
@@ -253,6 +282,21 @@ namespace MediaDatabaseCreator.Migrations
                         .HasForeignKey("FranchiseId");
 
                     b.Navigation("Franchise");
+                });
+
+            modelBuilder.Entity("MovieCharacter", b =>
+                {
+                    b.HasOne("MediaDatabaseCreator.Model.Character", null)
+                        .WithMany()
+                        .HasForeignKey("CharacterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MediaDatabaseCreator.Model.Movie", null)
+                        .WithMany()
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MediaDatabaseCreator.Model.Franchise", b =>
