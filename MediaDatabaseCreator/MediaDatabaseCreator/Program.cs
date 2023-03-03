@@ -1,4 +1,4 @@
-using MediaDatabaseCreator.Model.Entities;
+using MediaDatabaseCreator.Model;
 using MediaDatabaseCreator.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -27,7 +27,11 @@ namespace MediaDatabaseCreator
 
             builder.Services.AddControllers();
 
-            
+            // Automapper
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
+
 
             var app = builder.Build();
 

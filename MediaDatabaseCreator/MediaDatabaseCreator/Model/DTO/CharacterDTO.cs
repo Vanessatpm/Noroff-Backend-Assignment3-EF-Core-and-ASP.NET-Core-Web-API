@@ -14,6 +14,7 @@ namespace MediaDatabaseCreator.Model.DTO
         [MaxLength(8)]
         public string? Gender { get; set; }
         public string? PictureUrl { get; set; }
+        //public int[] Movies { get; set; }
 
         //// Navigation
         //public int? movieId { get; set; }

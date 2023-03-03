@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MediaDatabaseCreator.Services;
 using MediaDatabaseCreator.Model.Entities;
+using AutoMapper;
+using MediaDatabaseCreator.Model.DTO;
 
 namespace MediaDatabaseCreator.Controllers
 {
@@ -15,10 +17,12 @@ namespace MediaDatabaseCreator.Controllers
     public class CharacterController : ControllerBase
     {
         private readonly ICharacterService _characterService;
+        private readonly IMapper _mapper;
 
-        public CharacterController(ICharacterService characterService)
+        public CharacterController(ICharacterService characterService, IMapper mapper)
         {
             _characterService = characterService;
+            _mapper = mapper;
         }
 
         // GET: api/Characters
@@ -30,7 +34,7 @@ namespace MediaDatabaseCreator.Controllers
 
         // GET: api/Characters/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Character>> GetCharacter(int id)
+        public async Task<ActionResult<CharacterDTO>> GetCharacter(int id)
         {
             var character = await _characterService.GetByIdAsync(id);
 
@@ -38,7 +42,7 @@ namespace MediaDatabaseCreator.Controllers
             {
                 return NotFound();
             }
-            return character;
+            return Ok(_mapper.Map<CharacterDTO>(character));
         }
 
         [HttpGet("{id}/movies")]

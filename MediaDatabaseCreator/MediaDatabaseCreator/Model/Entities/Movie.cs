@@ -4,7 +4,7 @@ using System.Reflection.PortableExecutable;
 
 namespace MediaDatabaseCreator.Model.Entities
 {
-    public class MovieDTO
+    public class Movie
     {
         [Key]
         public int MovieId { get; set; }
@@ -22,6 +22,6 @@ namespace MediaDatabaseCreator.Model.Entities
         public int? characterId { get; set; }
         public virtual ICollection<Character> Characters { get; set; } = new HashSet<Character>();
         public int? FranchiseId { get; set; }
-        public virtual FranchiseDTO? Franchise { get; set; } = null!;
+        public virtual Franchise? Franchise { get; set; } = null!;
     }
 }

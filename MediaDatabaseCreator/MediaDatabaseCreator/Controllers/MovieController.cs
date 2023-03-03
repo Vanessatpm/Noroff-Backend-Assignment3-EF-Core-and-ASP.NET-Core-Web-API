@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MediaDatabaseCreator.Model.Entities;
+using MediaDatabaseCreator.Model;
 
 namespace MediaDatabaseCreator.Controllers
 {
@@ -22,14 +23,14 @@ namespace MediaDatabaseCreator.Controllers
 
         // GET: api/Movies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MovieDTO>>> GetMovies()
+        public async Task<ActionResult<IEnumerable<Movie>>> GetMovies()
         {
-            return await _context.Movies.ToListAsync();
+            return Ok(await _context.Movies.ToListAsync());
         }
 
         // GET: api/Movies/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<MovieDTO>> GetMovie(int id)
+        public async Task<ActionResult<Movie>> GetMovie(int id)
         {
             var movie = await _context.Movies.FindAsync(id);
 
@@ -44,7 +45,7 @@ namespace MediaDatabaseCreator.Controllers
         // PUT: api/Movies/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMovie(int id, MovieDTO movie)
+        public async Task<IActionResult> PutMovie(int id, Movie movie)
         {
             if (id != movie.MovieId)
             {
@@ -75,7 +76,7 @@ namespace MediaDatabaseCreator.Controllers
         // POST: api/Movies
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<MovieDTO>> PostMovie(MovieDTO movie)
+        public async Task<ActionResult<Movie>> PostMovie(Movie movie)
         {
             _context.Movies.Add(movie);
             await _context.SaveChangesAsync();

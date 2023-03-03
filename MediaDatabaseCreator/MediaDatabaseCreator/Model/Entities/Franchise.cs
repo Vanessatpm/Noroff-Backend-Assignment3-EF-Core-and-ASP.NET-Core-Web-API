@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MediaDatabaseCreator.Model.Entities
 {
-    public class FranchiseDTO
+    public class Franchise
     {
 
         [Key]
@@ -14,6 +14,6 @@ namespace MediaDatabaseCreator.Model.Entities
         public string? Description { get; set; }
 
         // Navigation
-        public virtual ICollection<MovieDTO> Movies { get; set; } = new HashSet<MovieDTO>();
+        public virtual ICollection<Movie> Movies { get; set; } = new HashSet<Movie>();
     }
 }

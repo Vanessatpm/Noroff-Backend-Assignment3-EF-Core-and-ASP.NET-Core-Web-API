@@ -17,6 +17,6 @@ namespace MediaDatabaseCreator.Model.Entities
 
         // Navigation
         public int? movieId { get; set; }
-        public virtual ICollection<MovieDTO> Movies { get; set; } = new HashSet<MovieDTO>();
+        public virtual ICollection<Movie> Movies { get; set; } = new HashSet<Movie>();
     }
 }
