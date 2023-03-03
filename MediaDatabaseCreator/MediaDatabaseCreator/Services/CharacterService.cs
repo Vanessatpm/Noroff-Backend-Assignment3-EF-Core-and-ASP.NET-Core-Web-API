@@ -21,7 +21,7 @@ namespace MediaDatabaseCreator.Services
             return obj;
         }
 
-        public void Delete(int obj)
+        public Task<Character?> DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
@@ -31,7 +31,7 @@ namespace MediaDatabaseCreator.Services
             return await _context.Characters.ToListAsync();
         }
 
-        public async Task<Character> GetByIdAsync(int id)
+        public async Task<Character?> GetByIdAsync(int id)
         { 
                 return await _context.Characters.FindAsync(id);
         }

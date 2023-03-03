@@ -46,7 +46,7 @@ namespace MediaDatabaseCreator.Controllers
         }
 
         [HttpGet("{id}/movies")]
-        public async Task<ActionResult<IEnumerable<MovieDTO>>> GetMoviesForCharacter(int id)
+        public async Task<ActionResult<IEnumerable<Movie>>> GetMoviesForCharacter(int id)
         {
             return Ok(await _characterService.GetMoviesAsync(id));
         }

@@ -19,7 +19,7 @@ namespace MediaDatabaseCreator.Model.Entities
         public string? MovieTrailerUrl { get; set; }
 
         // Navigation
-        public int? characterId { get; set; }
+        public int? CharacterId { get; set; }
         public virtual ICollection<Character> Characters { get; set; } = new HashSet<Character>();
         public int? FranchiseId { get; set; }
         public virtual Franchise? Franchise { get; set; } = null!;

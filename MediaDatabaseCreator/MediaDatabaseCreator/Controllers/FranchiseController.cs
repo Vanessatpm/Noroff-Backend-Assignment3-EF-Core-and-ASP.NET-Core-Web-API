@@ -5,34 +5,33 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MediaDatabaseCreator.Services.Franchises;
 using MediaDatabaseCreator.Model.Entities;
-using MediaDatabaseCreator.Model;
 
 namespace MediaDatabaseCreator.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/franchises")]
     [ApiController]
-    public class FranchisesController : ControllerBase
+    public class FranchiseController : ControllerBase
     {
-        private readonly FilmDbContext _context;
-
-        public FranchisesController(FilmDbContext context)
+        private readonly IFranchiseService _franchiseService;
+        public FranchiseController(IFranchiseService franchiseService)
         {
-            _context = context;
+            _franchiseService = franchiseService;
         }
 
-        // GET: api/Franchises
+        // GET: api/v1/franchises 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Franchise>>> GetFranchises()
         {
-            return Ok(await _context.Franchises.ToListAsync());
+            return Ok(await _franchiseService.GetAllAsync());
         }
-
-        // GET: api/Franchises/5
+        
+        // GET: api/v1/franchises/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Franchise>> GetFranchise(int id)
         {
-            var franchise = await _context.Franchises.FindAsync(id);
+            var franchise = await _franchiseService.GetByIdAsync(id);
 
             if (franchise == null)
             {
@@ -42,7 +41,7 @@ namespace MediaDatabaseCreator.Controllers
             return franchise;
         }
 
-        // PUT: api/Franchises/5
+        // PUT: api/v1/franchises/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutFranchise(int id, Franchise franchise)
@@ -52,57 +51,33 @@ namespace MediaDatabaseCreator.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(franchise).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FranchiseExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _franchiseService.UpdateAsync(franchise); // TODO:
+                                                            // make it nullable,
+                                                            // and if null: return NotFound()
 
             return NoContent();
         }
 
-        // POST: api/Franchises
+        // POST: api/v1/franchises
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Franchise>> PostFranchise(Franchise franchise)
         {
-            _context.Franchises.Add(franchise);
-            await _context.SaveChangesAsync();
-
+            await _franchiseService.AddAsync(franchise);
             return CreatedAtAction("GetFranchise", new { id = franchise.FranchiseId }, franchise);
         }
 
-        // DELETE: api/Franchises/5
+        // DELETE: api/v1/franchises/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFranchise(int id)
         {
-            var franchise = await _context.Franchises.FindAsync(id);
+            var franchise = await _franchiseService.DeleteAsync(id);
             if (franchise == null)
             {
                 return NotFound();
             }
-
-            _context.Franchises.Remove(franchise);
-            await _context.SaveChangesAsync();
-
             return NoContent();
         }
 
-        private bool FranchiseExists(int id)
-        {
-            return _context.Franchises.Any(e => e.FranchiseId == id);
-        }
     }
 }
