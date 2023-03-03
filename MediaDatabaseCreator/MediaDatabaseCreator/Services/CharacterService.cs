@@ -31,8 +31,8 @@ namespace MediaDatabaseCreator.Services
         }
 
         public async Task<Character> GetByIdAsync(int id)
-        {
-            return await _context.Characters.FindAsync(id);
+        { 
+                return await _context.Characters.FindAsync(id);
         }
 
         public async Task<IEnumerable<Movie>> GetMoviesAsync(int id)
