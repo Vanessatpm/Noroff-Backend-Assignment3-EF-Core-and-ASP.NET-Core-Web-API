@@ -6,7 +6,5 @@ namespace MediaDatabaseCreator.Services.Franchises
     {
         Task<IEnumerable<Franchise>?> GetAllMoviesAsync(int id);
         Task<IEnumerable<Character>?> GetAllCharactersAsync(int id);
-        Task<Movie> UpdateMovieAsync(int id);
-
     }
 }

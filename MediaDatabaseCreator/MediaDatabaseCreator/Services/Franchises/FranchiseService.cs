@@ -73,10 +73,6 @@ namespace MediaDatabaseCreator.Services.Franchises
             return obj;
         }
 
-        public async Task<Movie> UpdateMovieAsync(int id) {
-            throw new NotImplementedException();
-        }
-
         public async Task<Franchise?> DeleteAsync(int id)
         {
             var franchise = await GetByIdAsync(id);
