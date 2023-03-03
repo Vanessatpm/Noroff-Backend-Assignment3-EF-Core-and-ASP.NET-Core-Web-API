@@ -13,9 +13,9 @@ namespace MediaDatabaseCreator.Controllers
     [ApiController]
     public class MovieController : ControllerBase
     {
-        private readonly MovieDbContext _context;
+        private readonly FilmDbContext _context;
 
-        public MovieController(MovieDbContext context)
+        public MovieController(FilmDbContext context)
         {
             _context = context;
         }
