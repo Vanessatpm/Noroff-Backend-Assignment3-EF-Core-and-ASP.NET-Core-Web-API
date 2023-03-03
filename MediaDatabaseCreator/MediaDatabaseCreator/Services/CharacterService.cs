@@ -21,7 +21,7 @@ namespace MediaDatabaseCreator.Services
             return obj;
         }
 
-        public void Delete(int obj)
+        public Task<Character?> DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
