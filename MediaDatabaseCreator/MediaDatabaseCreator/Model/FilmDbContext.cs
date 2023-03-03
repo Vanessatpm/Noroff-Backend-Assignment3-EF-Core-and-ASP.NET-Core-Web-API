@@ -37,6 +37,7 @@ namespace MediaDatabaseCreator.Model
                new Character() { CharacterId = 4, FullName = "Luke Skywalker", Alias = "Jedi Knight", Gender = "Male", PictureUrl = "https://www.imdb.com/title/tt0076759/mediaviewer/rm2446233600/" },
                new Character() { CharacterId = 5, FullName = "Princess Leia Organa", Alias = "General Leia Organa", Gender = "Female", PictureUrl = "https://www.imdb.com/title/tt0076759/mediaviewer/rm1222220800/" },
                new Character() { CharacterId = 6, FullName = "Frodo Baggins", Alias = "Ring bearer", Gender = "Male", PictureUrl = "https://example.com/frodo.jpg" });
+            #endregion
 
             #region Movies
             modelBuilder.Entity<Movie>().HasData(
@@ -83,7 +84,7 @@ namespace MediaDatabaseCreator.Model
             x => x.HasOne<Movie>().WithMany().HasForeignKey("MovieId"),
             x => x.HasOne<Character>().WithMany().HasForeignKey("CharacterId"),
             x =>
-                    {
+            {
                 x.HasKey("MovieId", "CharacterId");
                 x.HasData(
                     new { CharacterId = 1, MovieId = 1 },
@@ -93,7 +94,7 @@ namespace MediaDatabaseCreator.Model
                     new { CharacterId = 2, MovieId = 3 },
                     new { CharacterId = 3, MovieId = 3 }
                 );
-                    });
+            });
             #endregion
         }
 

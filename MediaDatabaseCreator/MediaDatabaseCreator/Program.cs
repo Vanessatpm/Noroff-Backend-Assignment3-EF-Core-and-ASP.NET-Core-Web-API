@@ -17,7 +17,7 @@ namespace MediaDatabaseCreator
             builder.Services.AddControllers();
 
             builder.Services.AddDbContext<FilmDbContext>(options 
-                => options.UseSqlServer(builder.Configuration.GetConnectionString("VanessaMovieDatabase")));
+                => options.UseSqlServer(builder.Configuration.GetConnectionString("AbdullahMovieDatabase")));
             
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
