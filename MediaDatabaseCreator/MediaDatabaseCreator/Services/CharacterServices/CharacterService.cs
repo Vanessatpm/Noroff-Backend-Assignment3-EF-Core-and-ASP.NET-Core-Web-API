@@ -2,7 +2,7 @@
 using MediaDatabaseCreator.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace MediaDatabaseCreator.Services
+namespace MediaDatabaseCreator.Services.CharacterServices
 {
     public class CharacterService : ICharacterService
     {
@@ -32,21 +32,21 @@ namespace MediaDatabaseCreator.Services
         }
 
         public async Task<Character?> GetByIdAsync(int id)
-        { 
-                return await _context.Characters.FindAsync(id);
+        {
+            return await _context.Characters.FindAsync(id);
         }
 
         public async Task<IEnumerable<Movie>> GetMoviesAsync(int id)
         {
             return (await _context.Characters
-                .Where(c => c.CharacterId== id)
+                .Where(c => c.CharacterId == id)
                 .Include(c => c.Movies)
                 .FirstAsync()).Movies;
         }
 
         public async Task<Character> UpdateAsync(Character obj)
         {
-             _context.Entry(obj).State = EntityState.Modified;
+            _context.Entry(obj).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return obj;
         }

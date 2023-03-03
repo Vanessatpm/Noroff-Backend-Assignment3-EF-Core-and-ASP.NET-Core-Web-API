@@ -1,8 +1,10 @@
 using MediaDatabaseCreator.Model;
-using MediaDatabaseCreator.Services;
+using MediaDatabaseCreator.Services.CharacterServices;
 using MediaDatabaseCreator.Services.Franchises;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace MediaDatabaseCreator
 {
@@ -12,8 +14,13 @@ namespace MediaDatabaseCreator
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Configuring generated XML docs for Swagger
 
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+
+            // Add services to the container.
             builder.Services.AddControllers();
 
             builder.Services.AddDbContext<FilmDbContext>(options 
@@ -22,7 +29,19 @@ namespace MediaDatabaseCreator
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Film API",
+                    Description = "Simple API to manage Film information",
+                    License = new OpenApiLicense
+                    {
+                        Name = "MIT 2022",
+                        Url = new Uri("https://opensource.org/licenses/MIT")
+                    }
+                });
+                c.IncludeXmlComments(xmlPath);
+
             });
 
             builder.Services.AddTransient<ICharacterService, CharacterService>();

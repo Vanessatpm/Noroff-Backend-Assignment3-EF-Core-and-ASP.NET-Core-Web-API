@@ -5,15 +5,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MediaDatabaseCreator.Services;
 using MediaDatabaseCreator.Model.Entities;
 using AutoMapper;
 using MediaDatabaseCreator.Model.DTO;
+using MediaDatabaseCreator.Services.CharacterServices;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using System.Net.Mime;
 
 namespace MediaDatabaseCreator.Controllers
 {
+    /// <summary>
+    /// Controller for Characters
+    /// contains generic CRUD operations
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [ApiConventionType(typeof(DefaultApiConventions))]
+    [Produces(MediaTypeNames.Application.Json)]
+    [Consumes(MediaTypeNames.Application.Json)]
     public class CharacterController : ControllerBase
     {
         private readonly ICharacterService _characterService;
@@ -26,6 +35,10 @@ namespace MediaDatabaseCreator.Controllers
         }
 
         // GET: api/Characters
+        /// <summary>
+        /// returns a list of all characters in database
+        /// </summary>
+        /// <returns>List Of Characters</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Character>>> GetCharacters()
         {
@@ -33,6 +46,11 @@ namespace MediaDatabaseCreator.Controllers
         }
 
         // GET: api/Characters/5
+        /// <summary>
+        /// gets a single character and its relevant data from database
+        /// </summary>
+        /// <param name="id">Id of character</param>
+        /// <returns>Character</returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<CharacterDTO>> GetCharacter(int id)
         {

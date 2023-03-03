@@ -1,6 +1,6 @@
 ﻿using MediaDatabaseCreator.Model.Entities;
 
-namespace MediaDatabaseCreator.Services
+namespace MediaDatabaseCreator.Services.CharacterServices
 {
     public interface ICharacterService : ICrudService<Character, int>
     {
