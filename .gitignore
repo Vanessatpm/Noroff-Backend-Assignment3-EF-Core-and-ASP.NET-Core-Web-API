@@ -65,6 +65,9 @@ artifacts/
 # ASP.NET Scaffolding
 ScaffoldingReadMe.txt
 
+# Migration folder
+MediaDatabaseCreator/MediaDatabaseCreator/Migrations
+
 # StyleCop
 StyleCopReport.xml
 
@@ -396,3 +399,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+
