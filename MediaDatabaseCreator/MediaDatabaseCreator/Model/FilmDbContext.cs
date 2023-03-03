@@ -86,12 +86,12 @@ namespace MediaDatabaseCreator.Model
                     {
                         je.HasKey("CharacterId", "MovieId");
                         je.HasData(
-                            new { CharacterId = -1, MovieId = -2 },
-                            new { CharacterId = -2, MovieId = -2 },
-                            new { CharacterId = -2, MovieId = -1 },
-                            new { CharacterId = -3, MovieId = -2 },
-                            new { CharacterId = -2, MovieId = -3 },
-                            new { CharacterId = -6, MovieId = -1 });
+                            new { CharacterId = 1, MovieId = 2 },
+                            new { CharacterId = 2, MovieId = 2 },
+                            new { CharacterId = 2, MovieId = 1 },
+                            new { CharacterId = 3, MovieId = 2 },
+                            new { CharacterId = 2, MovieId = 3 },
+                            new { CharacterId = 6, MovieId = 1 });
                     });
             #endregion
 
