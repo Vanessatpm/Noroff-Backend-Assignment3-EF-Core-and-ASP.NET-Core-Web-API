@@ -77,25 +77,25 @@ namespace MediaDatabaseCreator.Model
 
             #region CharacterMovie
             modelBuilder.Entity<Character>()
-            .HasMany(c => c.Movies)
-            .WithMany(m => m.Characters)
-            .UsingEntity<Dictionary<string, object>>(
-            "MovieCharacter",
-            x => x.HasOne<Movie>().WithMany().HasForeignKey("MovieId"),
-            x => x.HasOne<Character>().WithMany().HasForeignKey("CharacterId"),
-            x =>
-            {
-                x.HasKey("MovieId", "CharacterId");
-                x.HasData(
-                    new { CharacterId = 1, MovieId = 1 },
-                    new { CharacterId = 2, MovieId = 1 },
-                    new { CharacterId = 1, MovieId = 2 },
-                    new { CharacterId = 3, MovieId = 2 },
-                    new { CharacterId = 2, MovieId = 3 },
-                    new { CharacterId = 3, MovieId = 3 }
-                );
-            });
+                .HasMany(character => character.Movies)
+                .WithMany(movie => movie.Characters)
+                .UsingEntity<Dictionary<string, object>>(
+                    "CharacterMovie",
+                    r => r.HasOne<Movie>().WithMany().HasForeignKey("MovieId"),
+                    l => l.HasOne<Character>().WithMany().HasForeignKey("CharacterId"),
+                    je =>
+                    {
+                        je.HasKey("CharacterId", "MovieId");
+                        je.HasData(
+                            new { CharacterId = -1, MovieId = -2 },
+                            new { CharacterId = -2, MovieId = -2 },
+                            new { CharacterId = -2, MovieId = -1 },
+                            new { CharacterId = -3, MovieId = -2 },
+                            new { CharacterId = -2, MovieId = -3 },
+                            new { CharacterId = -6, MovieId = -1 });
+                    });
             #endregion
+
         }
 
     }
