@@ -23,7 +23,7 @@ namespace MediaDatabaseCreator.Services.Franchises
             return await _context.Franchises.FindAsync(id);
         }
         //*************
-        public async Task<IEnumerable<Franchise>?> GetAllMovies(int id)
+        public async Task<IEnumerable<Franchise>?> GetAllMoviesAsync(int id)
         {
             //var franchise = await GetByIdAsync(id);
             //if (franchise == null)
@@ -33,6 +33,11 @@ namespace MediaDatabaseCreator.Services.Franchises
             // TODO: fetch movies. //return await franchise.Movies.ToListAsync();
             throw new NotImplementedException();
         }
+
+        public async Task<IEnumerable<Character>?> GetAllCharactersAsync(int id) { 
+            throw new NotImplementedException();
+        }
+
         //**************
         public async Task<Franchise> UpdateAsync(Franchise obj)
         {
@@ -66,6 +71,10 @@ namespace MediaDatabaseCreator.Services.Franchises
             await _context.Franchises.AddAsync(obj);
             await _context.SaveChangesAsync();
             return obj;
+        }
+
+        public async Task<Movie> UpdateMovieAsync(int id) {
+            throw new NotImplementedException();
         }
 
         public async Task<Franchise?> DeleteAsync(int id)
