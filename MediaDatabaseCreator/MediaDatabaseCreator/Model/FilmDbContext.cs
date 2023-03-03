@@ -78,7 +78,7 @@ namespace MediaDatabaseCreator.Model
             modelBuilder.Entity<Character>()
             .HasMany(c => c.Movies)
             .WithMany(m => m.Characters)
-                .UsingEntity<Dictionary<string, object>>(
+            .UsingEntity<Dictionary<string, object>>(
             "MovieCharacter",
             x => x.HasOne<Movie>().WithMany().HasForeignKey("MovieId"),
             x => x.HasOne<Character>().WithMany().HasForeignKey("CharacterId"),
