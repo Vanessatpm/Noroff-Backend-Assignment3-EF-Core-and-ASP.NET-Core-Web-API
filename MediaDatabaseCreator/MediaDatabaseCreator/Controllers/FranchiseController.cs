@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MediaDatabaseCreator.Model;
 using MediaDatabaseCreator.Services.Franchises;
+using MediaDatabaseCreator.Model.Entities;
 
 namespace MediaDatabaseCreator.Controllers
 {
@@ -15,12 +15,10 @@ namespace MediaDatabaseCreator.Controllers
     public class FranchiseController : ControllerBase
     {
         private readonly IFranchiseService _franchiseService;
-
         public FranchiseController(IFranchiseService franchiseService)
         {
             _franchiseService = franchiseService;
         }
-
 
         // GET: api/v1/franchises 
         [HttpGet]

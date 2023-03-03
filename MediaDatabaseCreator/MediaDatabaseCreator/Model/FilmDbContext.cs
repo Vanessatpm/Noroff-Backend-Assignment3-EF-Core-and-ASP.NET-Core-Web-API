@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;
+using MediaDatabaseCreator.Model.Entities;
 
 namespace MediaDatabaseCreator.Model
 {

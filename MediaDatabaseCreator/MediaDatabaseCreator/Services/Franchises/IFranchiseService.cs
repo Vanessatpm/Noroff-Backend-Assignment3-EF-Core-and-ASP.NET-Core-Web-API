@@ -1,4 +1,4 @@
-﻿using MediaDatabaseCreator.Model;
+﻿using MediaDatabaseCreator.Model.Entities;
 
 namespace MediaDatabaseCreator.Services.Franchises
 {

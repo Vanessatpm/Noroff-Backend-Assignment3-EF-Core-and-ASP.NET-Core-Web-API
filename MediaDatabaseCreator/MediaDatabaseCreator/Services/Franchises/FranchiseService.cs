@@ -1,4 +1,5 @@
 ﻿using MediaDatabaseCreator.Model;
+using MediaDatabaseCreator.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace MediaDatabaseCreator.Services.Franchises

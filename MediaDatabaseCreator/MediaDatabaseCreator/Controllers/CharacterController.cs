@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MediaDatabaseCreator.Model;
 using MediaDatabaseCreator.Services;
+using MediaDatabaseCreator.Model.Entities;
 
 namespace MediaDatabaseCreator.Controllers
 {
@@ -14,7 +14,6 @@ namespace MediaDatabaseCreator.Controllers
     [ApiController]
     public class CharacterController : ControllerBase
     {
-        private readonly FilmDbContext _context;
         private readonly ICharacterService _characterService;
 
         public CharacterController(ICharacterService characterService)
@@ -26,21 +25,26 @@ namespace MediaDatabaseCreator.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Character>>> GetCharacters()
         {
-            return await _characterService.GetAllAsync();
+            return Ok(await _characterService.GetAllAsync());
         }
 
         // GET: api/Characters/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Character>> GetCharacter(int id)
         {
-            var character = await _context.Characters.FindAsync(id);
+            var character = await _characterService.GetByIdAsync(id);
 
             if (character == null)
             {
                 return NotFound();
             }
-
             return character;
+        }
+
+        [HttpGet("{id}/movies")]
+        public async Task<ActionResult<IEnumerable<Movie>>> GetMoviesForCharacter(int id)
+        {
+            return Ok(await _characterService.GetMoviesAsync(id));
         }
 
         // PUT: api/Characters/5
@@ -53,23 +57,7 @@ namespace MediaDatabaseCreator.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(character).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CharacterExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _characterService.UpdateAsync(character);
 
             return NoContent();
         }
@@ -79,31 +67,10 @@ namespace MediaDatabaseCreator.Controllers
         [HttpPost]
         public async Task<ActionResult<Character>> PostCharacter(Character character)
         {
-            _context.Characters.Add(character);
-            await _context.SaveChangesAsync();
+           await _characterService.AddAsync(character);
 
             return CreatedAtAction("GetCharacter", new { id = character.CharacterId }, character);
         }
 
-        // DELETE: api/Characters/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCharacter(int id)
-        {
-            var character = await _context.Characters.FindAsync(id);
-            if (character == null)
-            {
-                return NotFound();
-            }
-
-            _context.Characters.Remove(character);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool CharacterExists(int id)
-        {
-            return _context.Characters.Any(e => e.CharacterId == id);
-        }
     }
 }

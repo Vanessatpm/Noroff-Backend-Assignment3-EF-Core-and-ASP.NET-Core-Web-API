@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MediaDatabaseCreator.Model
+namespace MediaDatabaseCreator.Model.Entities
 {
     public class Character
     {
@@ -16,6 +16,7 @@ namespace MediaDatabaseCreator.Model
         public string? PictureUrl { get; set; }
 
         // Navigation
-        public virtual ICollection<Movie> Movies { get;set; } = new HashSet<Movie>();
+        public int? MovieId { get; set; }
+        public virtual ICollection<Movie> Movies { get; set; } = new HashSet<Movie>();
     }
 }
