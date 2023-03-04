@@ -11,6 +11,7 @@ using MediaDatabaseCreator.Model.DTO;
 using MediaDatabaseCreator.Services.CharacterServices;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using System.Net.Mime;
+using MediaDatabaseCreator.Model.DTO.CharacterDTO_s;
 
 namespace MediaDatabaseCreator.Controllers
 {
@@ -87,8 +88,15 @@ namespace MediaDatabaseCreator.Controllers
         // POST: api/Characters
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Character>> PostCharacter(Character character)
+        public async Task<ActionResult<Character>> PostCharacter(CharacterPostDTO characterDTO)
         {
+            Character character = new Character()
+            {
+                FullName = characterDTO.FullName,
+                Alias = characterDTO.Alias,
+                PictureUrl = characterDTO.PictureUrl
+            };
+
            await _characterService.AddAsync(character);
 
             return CreatedAtAction("GetCharacter", new { id = character.CharacterId }, character);
