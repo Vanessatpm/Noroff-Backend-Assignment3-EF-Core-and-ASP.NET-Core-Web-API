@@ -40,9 +40,9 @@ namespace MediaDatabaseCreator.Controllers
         /// </summary>
         /// <returns>List Of Characters</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Character>>> GetCharacters()
+        public async Task<ActionResult<IEnumerable<CharacterDTO>>> GetCharacters()
         {
-            return Ok(await _characterService.GetAllAsync());
+            return Ok(_mapper.Map<List<CharacterDTO>>(await _characterService.GetAllAsync()));
         }
 
         // GET: api/Characters/5
