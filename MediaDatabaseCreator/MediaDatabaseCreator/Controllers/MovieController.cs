@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MediaDatabaseCreator.Model.Entities;
 using MediaDatabaseCreator.Model;
+using MediaDatabaseCreator.Services;
 
 namespace MediaDatabaseCreator.Controllers
 {
@@ -14,25 +15,25 @@ namespace MediaDatabaseCreator.Controllers
     [ApiController]
     public class MovieController : ControllerBase
     {
-        private readonly FilmDbContext _context;
+        private readonly IMovieService _movieService;
 
-        public MovieController(FilmDbContext context)
+        public MovieController(IMovieService movieService)
         {
-            _context = context;
+            _movieService = movieService;
         }
 
-        // GET: api/Movies
+        // GET: api/v1/movies
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Movie>>> GetMovies()
         {
-            return Ok(await _context.Movies.ToListAsync());
+            return Ok(await _movieService.GetAllAsync());
         }
 
-        // GET: api/Movies/5
+        // GET: api/v1/movies/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Movie>> GetMovie(int id)
         {
-            var movie = await _context.Movies.FindAsync(id);
+            var movie = await _movieService.GetByIdAsync(id);
 
             if (movie == null)
             {
@@ -42,7 +43,7 @@ namespace MediaDatabaseCreator.Controllers
             return movie;
         }
 
-        // PUT: api/Movies/5
+        // PUT: api/v1/movies/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMovie(int id, Movie movie)
@@ -51,51 +52,31 @@ namespace MediaDatabaseCreator.Controllers
             {
                 return BadRequest();
             }
-
-            _context.Entry(movie).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MovieExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            await _movieService.UpdateAsync(movie);// TODO:
+                                                   // make it throw an error if the franchise does not exist,
+                                                   // and if it is thrown:
+                                                   // return NotFound()
             return NoContent();
         }
 
-        // POST: api/Movies
+        // POST: api/v1/movies
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Movie>> PostMovie(Movie movie)
         {
-            _context.Movies.Add(movie);
-            await _context.SaveChangesAsync();
-
+            await _movieService.AddAsync(movie);
             return CreatedAtAction("GetMovie", new { id = movie.MovieId }, movie);
         }
 
-        // DELETE: api/Movies/5
+        // DELETE: api/v1/movies/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMovie(int id)
         {
-            var movie = await _context.Movies.FindAsync(id);
+            var movie = await _movieService.DeleteAsync(id);
             if (movie == null)
             {
                 return NotFound();
             }
-
-            _context.Movies.Remove(movie);
-            await _context.SaveChangesAsync();
 
             return NoContent();
         }

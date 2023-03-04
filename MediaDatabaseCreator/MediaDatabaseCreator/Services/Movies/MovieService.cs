@@ -55,8 +55,7 @@ namespace MediaDatabaseCreator.Services
             //{
             //    if (!FranchiseExists(id))
             //    {
-            //        return null; 
-            // TODO: make Franchise in return value nullable
+            //        throw error
 
             //    }
             //    else

@@ -52,8 +52,8 @@ namespace MediaDatabaseCreator.Controllers
             }
 
             await _franchiseService.UpdateAsync(franchise); // TODO:
-                                                            // make it nullable,
-                                                            // and if null: return NotFound()
+                                                            // make it throw an error if the franchise does not exist,
+                                                            // and if it is thrown: return NotFound()
 
             return NoContent();
         }
