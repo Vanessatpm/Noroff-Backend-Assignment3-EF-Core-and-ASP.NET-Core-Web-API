@@ -1,5 +1,7 @@
 ﻿using MediaDatabaseCreator.Model;
 using MediaDatabaseCreator.Model.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace MediaDatabaseCreator.Services
 {
@@ -11,34 +13,75 @@ namespace MediaDatabaseCreator.Services
             _context = context;
         }
 
-        public Task<Movie> AddAsync(Movie obj)
+        public async Task<IEnumerable<Movie>> GetAllAsync()
         {
+            return await _context.Movies.ToListAsync();
+        }
+
+        public async Task<Movie?> GetByIdAsync(int id)
+        {
+            return await _context.Movies.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<Character>?> GetAllCharactersAsync(int id)
+        {
+            //var movie = await GetByIdAsync(id);
+            //if (movie == null)
+            //{
+            //    return null;
+            //}
+            // TODO: fetch characters. //return await movie.Characters.ToListAsync();
             throw new NotImplementedException();
         }
 
-        public Task<Movie?> DeleteAsync(int id)
+        public async Task<Movie> AddAsync(Movie obj)
         {
-            throw new NotImplementedException();
+            await _context.Movies.AddAsync(obj);
+            await _context.SaveChangesAsync();
+            return obj;
         }
 
-        public Task<IEnumerable<Movie>> GetAllAsync()
+        public async Task<Movie> UpdateAsync(Movie obj)
         {
-            throw new NotImplementedException();
+            _context.Entry(obj).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            // TODO:
+            //try
+            //{
+            //    await _context.SaveChangesAsync();
+            //}
+            //catch (DbUpdateConcurrencyException)
+            //{
+            //    if (!FranchiseExists(id))
+            //    {
+            //        return null; 
+            // TODO: make Franchise in return value nullable
+
+            //    }
+            //    else
+            //    {
+            //        throw;
+            //    }
+            //}
+
+            return obj;
         }
 
-        public Task<IEnumerable<Character>?> GetAllCharactersAsync(int id)
+        public async Task<Movie?> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var movie = await GetByIdAsync(id);
+            if (movie != null)
+            {
+                _context.Movies.Remove(movie);
+
+            }
+            return movie;
         }
 
-        public Task<Movie?> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Movie> UpdateAsync(Movie obj)
-        {
-            throw new NotImplementedException();
-        }
+        //private bool MovieExists(int id)
+        //{
+        //    return _context.Movies.Any(e => e.MovieId == id);
+        //}
     }
 }

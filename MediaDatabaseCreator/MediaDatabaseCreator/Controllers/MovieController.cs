@@ -10,7 +10,7 @@ using MediaDatabaseCreator.Model;
 
 namespace MediaDatabaseCreator.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/movies")]
     [ApiController]
     public class MovieController : ControllerBase
     {
@@ -100,9 +100,5 @@ namespace MediaDatabaseCreator.Controllers
             return NoContent();
         }
 
-        private bool MovieExists(int id)
-        {
-            return _context.Movies.Any(e => e.MovieId == id);
-        }
     }
 }

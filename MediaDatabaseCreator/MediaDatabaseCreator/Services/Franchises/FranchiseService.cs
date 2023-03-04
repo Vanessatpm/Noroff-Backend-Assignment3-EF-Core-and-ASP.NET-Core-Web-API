@@ -39,6 +39,14 @@ namespace MediaDatabaseCreator.Services.Franchises
         }
 
         //**************
+
+        public async Task<Franchise> AddAsync(Franchise obj)
+        {
+            await _context.Franchises.AddAsync(obj);
+            await _context.SaveChangesAsync();
+            return obj;
+        }
+
         public async Task<Franchise> UpdateAsync(Franchise obj)
         {
             _context.Entry(obj).State = EntityState.Modified;
@@ -63,13 +71,6 @@ namespace MediaDatabaseCreator.Services.Franchises
             //    }
             //}
 
-            return obj;
-        }
-
-        public async Task<Franchise> AddAsync(Franchise obj)
-        {
-            await _context.Franchises.AddAsync(obj);
-            await _context.SaveChangesAsync();
             return obj;
         }
 
