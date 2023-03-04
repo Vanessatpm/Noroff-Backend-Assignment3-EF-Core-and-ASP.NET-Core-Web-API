@@ -35,7 +35,6 @@ namespace MediaDatabaseCreator.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/Characters
         /// <summary>
         /// returns a list of all characters in database
         /// </summary>
@@ -46,7 +45,6 @@ namespace MediaDatabaseCreator.Controllers
             return Ok(_mapper.Map<List<CharacterDTO>>(await _characterService.GetAllAsync()));
         }
 
-        // GET: api/Characters/5
         /// <summary>
         /// gets a single character and its relevant data from database
         /// </summary>
@@ -64,6 +62,11 @@ namespace MediaDatabaseCreator.Controllers
             return Ok(_mapper.Map<CharacterDTO>(character));
         }
 
+        /// <summary>
+        /// this gets all the movies that the character have participated in from database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}/movies")]
         public async Task<ActionResult<IEnumerable<Movie>>> GetMoviesForCharacter(int id)
         {
@@ -72,6 +75,12 @@ namespace MediaDatabaseCreator.Controllers
 
         // PUT: api/Characters/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Updates a single character in the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="character"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCharacter(int id, Character character)
         {
@@ -79,7 +88,6 @@ namespace MediaDatabaseCreator.Controllers
             {
                 return BadRequest();
             }
-
             await _characterService.UpdateAsync(character);
 
             return NoContent();
@@ -87,6 +95,11 @@ namespace MediaDatabaseCreator.Controllers
 
         // POST: api/Characters
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// adds new character to the database
+        /// </summary>
+        /// <param name="characterDTO"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<Character>> PostCharacter(CharacterPostDTO characterDTO)
         {
@@ -94,6 +107,7 @@ namespace MediaDatabaseCreator.Controllers
             {
                 FullName = characterDTO.FullName,
                 Alias = characterDTO.Alias,
+                Gender = characterDTO.Gender,
                 PictureUrl = characterDTO.PictureUrl
             };
 
